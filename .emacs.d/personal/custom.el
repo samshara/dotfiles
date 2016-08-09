@@ -66,7 +66,39 @@
 
 ;; Disable mouse buffer menu globally
 (global-unset-key [C-down-mouse-1])
-;; custom.el ends here
+
+;; multiple cursors functionality
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key (kbd "<f6>") 'ivy-resume)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+
+;;Disable mouse or touchpad in emacs
+(define-minor-mode disable-mouse-mode
+  "A minor-mode that disables all mouse keybinds."
+  :global t
+  :lighter " ☣"
+  :keymap (make-sparse-keymap))
+
+(dolist (type '(mouse down-mouse drag-mouse
+                      double-mouse triple-mouse))
+  (dolist (prefix '("" C- M- S- M-S- C-M- C-S- C-M-S-))
+    ;; Yes, I actually HAD to go up to 7 here.
+    (dotimes (n 7)
+      (let ((k (format "%s%s-%s" prefix type n)))
+        (define-key disable-mouse-mode-map
+          (vector (intern k)) #'ignore)))))
+
+(disable-mouse-mode 1)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -81,5 +113,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Source Code Pro" :foundry "ADBO" :slant normal :weight normal :height 110 :width normal))))
+ '(default ((t (:family "Source Code Pro" :foundry "ADBO" :slant normal :weight normal :height 98 :width normal))))
  '(vertical-border ((t (:foreground "#3F3F3F")))))
+
+;; custom.el ends here
