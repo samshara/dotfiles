@@ -9,9 +9,9 @@
 # Unique Bash version check
 if ((BASH_VERSINFO[0] < 4))
 then 
-  echo "sensible.bash: Looks like you're running an older version of Bash." 
-  echo "sensible.bash: You need at least bash-4.0 or some options will not work correctly." 
-  echo "sensible.bash: Keep your software up-to-date!"
+    echo "sensible.bash: Looks like you're running an older version of Bash." 
+    echo "sensible.bash: You need at least bash-4.0 or some options will not work correctly." 
+    echo "sensible.bash: Keep your software up-to-date!"
 fi
 
 ## GENERAL OPTIONS ##
@@ -89,24 +89,24 @@ shopt -s cdspell 2> /dev/null
 # This defines where cd looks for targets
 # Add the directories you want to have fast access to, separated by colon
 # Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
-CDPATH="."
+CDPATH=":~:~/projects"
 
 # This allows you to bookmark your favorite places across the file system
 # Define a variable containing a path and you will be able to cd into it regardless of the directory you're in
 shopt -s cdable_vars
 
 # Examples:
-# export dotfiles="$HOME/dotfiles"
-# export projects="$HOME/projects"
-# export documents="$HOME/Documents"
-# export dropbox="$HOME/Dropbox"
+export dotfiles="$HOME/dotfiles"
+export projects="$HOME/projects"
+export documents="$HOME/Documents"
+export dropbox="$HOME/Dropbox"
 
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 if [ -f ~/.bash_aliases ]; then
-        . ~/.bash_aliases
+    . ~/.bash_aliases
 fi
 
 alias dir="dir --color=auto"
@@ -144,34 +144,47 @@ BGCYAN='\[\e[1;36m\]'
 WHITE='\[\e[0;37m\]'
 BWHITE='\[\e[1;37m\]'
 BGWHITE='\[\e[1;37m\]'
+COLOR_NONE='\[\e[0m\]'
+
+# Determine active Python virtualenv details.
+function set_virtualenv () {
+    if test -z "$VIRTUAL_ENV" ; then
+        PYTHON_VIRTUALENV=""
+    else
+        PYTHON_VIRTUALENV="${BLUE}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE} "
+    fi
+}
 
 PROMPT_COMMAND=my_prompt
 
 function my_prompt
 {
-if [ "$?" -eq "0" ]
-then
-#smiley
-SC="${GREEN}❱❱"
-else
-#frowney
-SC="${RED}❱❱"
-fi
-if [ $UID -eq 0 ]
-then
-#root user color
-UC="${RED}"
-else
-#normal user color
-UC="${BWHITE}"
-fi
-#hostname color
-HC="${GREENA}"
-#regular color
-RC="${BWHITE}"
-#default color
-DF='\[\e[0m\]'
-PS1="[${DF}@${HC}dovakiin${DF}]${SC}${DF} "
+    if [ "$?" -eq "0" ]
+    then
+        #smiley
+        SC="${GREEN}"
+    else
+        #frowney
+        SC="${RED}"
+    fi
+    if [ $UID -eq 0 ]
+    then
+        #root user color
+        UC="${RED}"
+    else
+        #normal user color
+        UC="${BWHITE}"
+    fi
+    #hostname color
+    HC="${GREENA}"
+    #regular color
+    RC="${BWHITE}"
+    #default color
+    DF='\[\e[0m\]'
+    # Set the PYTHON_VIRTUALENV variable.
+    set_virtualenv
+
+    PS1="[${PYTHON_VIRTUALENV}${BMAGENTA}\w ${GREEN}@${UC}\u${DF}]${DF}"
 }
 
 # Try to enable the auto-completion (type: "pacman -S bash-completion" to install it).
@@ -180,3 +193,11 @@ source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
 # add anaconda
 export PATH="/opt/anaconda/bin:$PATH"
 export ALTERNATE_EDITOR=""
+
+# added by Anaconda3 4.2.0 installer
+export PATH="/home/dovakiin/anaconda3/bin:$PATH"
+export EDITOR=vim
+
+export NVM_DIR="/home/dovakiin/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+

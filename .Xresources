@@ -1,7 +1,3 @@
-#define rai_font     Roboto Mono for Powerline
-#define rai_fontsize 10
-
-
 ! hard contrast: *background: #1d2021
 *background: #282828
 ! soft contrast: *background: #32302f
@@ -33,3 +29,11 @@
 
 #include </home/dovakiin/.xres/urxvt>
 #include </home/dovakiin/.xres/xft>
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! ------------------------------------------------------------------------------
+rofi.color-enabled: true
+rofi.color-window: #273238, #273238, #1e2529
+rofi.color-normal: #273238, #c1c1c1, #273238, #394249, #ffffff
+rofi.color-active: #273238, #80cbc4, #273238, #394249, #80cbc4
+rofi.color-urgent: #273238, #ff1844, #273238, #394249, #ff1844

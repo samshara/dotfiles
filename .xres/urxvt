@@ -1,4 +1,5 @@
-
+#define rai_font     Roboto Mono for Powerline
+#define rai_fontsize 8
 ! Compile xft: Attempt to find a visual with the given bit depth;
 URxvt*depth: 32
 
@@ -9,11 +10,11 @@ URxvt*buffered: true
 URxvt.scrollBar: false
 
 ! Clickable links
-URxvt.perl-ext-common: default,keyboard-select,clipboard,url-select
+URxvt.perl-ext-common: default,keyboard-select,matcher
 
 
 ! Select the fonts to be used. This is a comma separated list of font
-URxvt*font: xft:rai_font:medium:size=rai_fontsize
+URxvt*font: xft:rai_font:medium:size=rai_fontsize,xft:Noto Emoji
 URxvt*boldFont: xft:rai_font:bold:size=rai_fontsize
 URxvt*italicFont: xft:rai_font:italic:size=rai_fontsize
 URxvt*boldItalicFont: xft:rai_font:bold:italic:size=rai_fontsize
@@ -69,7 +70,7 @@ URxvt*cursorBlink: false
 URxvt*cursorUnderline: false
 
 ! Sets the spacing between letters
-URxvt*letterSpace: -1
+URxvt*letterSpace:0
 
 ! Specifies whether to use native transparency
 URxvt*transparent: false
@@ -80,14 +81,7 @@ URxvt.iso14755: false
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 
-! Clipboard functionality
-URxvt.keysym.M-c:   perl:clipboard:copy
-URxvt.keysym.M-v:   perl:clipboard:paste
-URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
-URxvt.clipboard.autocopy: true
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
 
-! Url-select functionality
-URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.url-select.button: 2 
-URxvt.url-select.launcher: /usr/bin/firefox
-URxvt.url-select.underline: true
+

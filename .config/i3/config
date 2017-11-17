@@ -173,7 +173,7 @@ set $power_control "[l]ock log[o]ut [s]uspend [h]ibernate [r]eboot [p]oweroff"
 mode  $power_control {
 	bindsym l exec ~/.i3/i3lock; mode "default"
 		bindsym o exec i3-msg exit; mode "default"
-		bindsym s exec ~/.i3/i3lock && systemctl suspend; mode "default"
+		bindsym s exec systemctl suspend; mode "default"
 		bindsym h exec systemctl hibernate; mode "default"
 		bindsym r exec systemctl reboot; mode "default"
 		bindsym p exec systemctl poweroff; mode "default"
@@ -197,7 +197,9 @@ mode $launcher {
 #Workspace Assignment
 #assign [class="Firefox"] $workspace2
 assign [class="Emacs"] $workspace3
-
+assign [class="jetbrains-studio"] $workspace2
+assign [class="Slack"] $workspace4
+assign [class="Spotify"] $workspace5
 # Floating
 for_window [class="Lxappearance"] floating enable
 for_window [class="^URxvt$" instance="scratchpad"] border none;move scratchpad
@@ -227,6 +229,7 @@ bindsym $mod+p scratchpad show
 bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+n                   gaps inner all set 0;gaps outer all set 0; 
 bindsym $mod+m                   gaps inner all set $gapsinner;gaps outer all set $gapsouter;
+bindsym $mod+Shift+m                   move workspace to output left
 
 bindsym $mod+r mode "resize"
 bindsym $mod+y mode $power_control
@@ -254,20 +257,22 @@ bar {
 		}
 }
 #Audio Controls
-bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 1+ unmute"
-bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 1- unmute"
-bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
 
 #Screen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
 #Wallpaper
-exec --no-startup-id feh --bg-fill /home/dovakiin/Pictures/wallpaper/default.jpg
+exec --no-startup-id feh --bg-fill /home/dovakiin/Pictures/wallpaper/wallhaven-279963.jpg
 #Redshift
 exec --no-startup-id redshift -l 27.41:84.25 &
 #Startup
 exec --no-startup-id compton -b --config /home/dovakiin/.config/compton.conf &
+#Dual monitor setup for work
+exec --no-startup-id dual_monitor &
 #Screenshots
 bindsym Print exec gnome-screenshot
 bindsym --release Shift+Print exec gnome-screenshot -a
