@@ -197,6 +197,7 @@ mode $launcher {
 #Workspace Assignment
 #assign [class="Firefox"] $workspace2
 assign [class="Emacs"] $workspace3
+assign [class="Chrome"] $workspace1 
 assign [class="jetbrains-studio"] $workspace2
 assign [class="Slack"] $workspace4
 assign [class="Spotify"] $workspace5
