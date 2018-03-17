@@ -70,12 +70,12 @@ URxvt*cursorBlink: false
 URxvt*cursorUnderline: false
 
 ! Sets the spacing between letters
-URxvt*letterSpace:0
+URxvt*letterSpace: 1
 
 ! Specifies whether to use native transparency
 URxvt*transparent: false
 
-URxvt.iso14755: false
+URxvt.iso14755:false
 
 ! Keyboard select
 URxvt.keysym.M-Escape: perl:keyboard-select:activate

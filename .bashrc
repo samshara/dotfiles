@@ -195,8 +195,10 @@ export PATH="/opt/anaconda/bin:$PATH"
 export ALTERNATE_EDITOR=""
 
 # added by Anaconda3 4.2.0 installer
-export PATH="/home/dovakiin/anaconda3/bin:$PATH"
+# add ruby gem path
+export PATH="/home/dovakiin/anaconda3/bin:$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 export EDITOR=vim
+export GEM_HOME=$HOME/.gem
 
 export NVM_DIR="/home/dovakiin/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
