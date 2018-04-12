@@ -203,3 +203,5 @@ export GEM_HOME=$HOME/.gem
 export NVM_DIR="/home/dovakiin/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
+# add fzf files for bash integration
+source /usr/share/fzf/completion.bash && source /usr/share/fzf/key-bindings.bash
