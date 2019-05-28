@@ -23,8 +23,8 @@ set $border #ffbb33
 set $red    #cf000f
 
 #Workspaces
-set $workspace1 "1:"
-set $workspace2 "2:"
+set $workspace1 "1:"
+set $workspace2 "2:"
 set $workspace3 "3: "
 set $workspace4 "4:"
 set $workspace5 "5:"
@@ -171,7 +171,7 @@ mode "resize"{
 # Power control mode
 set $power_control "[l]ock log[o]ut [s]uspend [h]ibernate [r]eboot [p]oweroff"
 mode  $power_control {
-	bindsym l exec ~/.i3/i3lock; mode "default"
+	bindsym l exec betterlockscreen -l  ; mode "default"
 		bindsym o exec i3-msg exit; mode "default"
 		bindsym s exec systemctl suspend; mode "default"
 		bindsym h exec systemctl hibernate; mode "default"
@@ -199,10 +199,11 @@ mode $launcher {
 assign [class="Emacs"] $workspace3
 assign [class="Google-chrome"] $workspace1 
 assign [class="jetbrains-studio"] $workspace2
-assign [class="Slack"] $workspace4
+assign [class="Code"] $workspace4
 assign [class="Spotify"] $workspace5
 # Floating
 for_window [class="Lxappearance"] floating enable
+for_window [class="Gnome-calculator"] floating enable
 for_window [class="^URxvt$" instance="scratchpad"] border none;move scratchpad
 
 #Set window appearence          border    bg        fg       indicator
@@ -239,7 +240,7 @@ bindsym $mod+i mode $launcher
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-	status_command i3blocks
+	  status_command i3blocks
 		font pango:Roboto Mono, FontAwesome 9
 		position top
 		separator_symbol "⎤⎩"
@@ -256,11 +257,11 @@ bar {
 				urgent_workspace   $black       $black       $red
 				binding_mode       $black       $black       $grey
 		}
-}
+ }
 #Audio Controls
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
 
 #Screen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
@@ -274,6 +275,7 @@ exec --no-startup-id redshift -l 27.41:84.25 &
 exec --no-startup-id compton -b --config /home/dovakiin/.config/compton.conf &
 #Dual monitor setup for work
 exec --no-startup-id dual_monitor &
+exec --no-startup-id betterlockscreen -w &
 #Screenshots
 bindsym Print exec gnome-screenshot
 bindsym --release Shift+Print exec gnome-screenshot -a

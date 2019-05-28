@@ -95,6 +95,8 @@ CDPATH=":~:~/projects"
 # Define a variable containing a path and you will be able to cd into it regardless of the directory you're in
 shopt -s cdable_vars
 
+complete -d cd
+
 # Examples:
 export dotfiles="$HOME/dotfiles"
 export projects="$HOME/projects"
@@ -173,7 +175,7 @@ function my_prompt
         UC="${RED}"
     else
         #normal user color
-        UC="${BWHITE}"
+        UC="${BGWHITE}"
     fi
     #hostname color
     HC="${GREENA}"
@@ -190,14 +192,12 @@ function my_prompt
 # Try to enable the auto-completion (type: "pacman -S bash-completion" to install it).
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
-# add anaconda
-export PATH="/opt/anaconda/bin:$PATH"
 export ALTERNATE_EDITOR=""
 
 # added by Anaconda3 4.2.0 installer
 # add ruby gem path
-export PATH="/home/dovakiin/anaconda3/bin:$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-export EDITOR=vim
+export EDITOR=emacsclient
+export VISUAL=emacsclient
 export GEM_HOME=$HOME/.gem
 
 export NVM_DIR="/home/dovakiin/.nvm"
@@ -205,3 +205,20 @@ export NVM_DIR="/home/dovakiin/.nvm"
 
 # add fzf files for bash integration
 source /usr/share/fzf/completion.bash && source /usr/share/fzf/key-bindings.bash
+
+# get news
+getnews () {
+    curl https://newsapi.org/v2/top-headlines -s -G \
+         -d sources=$1 \
+         -d apiKey=6ba822c1df3f4f799a0164485799de58 \
+        | jq '.articles[] | .title, .url'
+}
+
+# start the day
+startmyday () {
+    echo "Good morning, samshara."
+    echo "The weather right now:"
+    ansiweather -l kathmandu
+    echo "News from Hacker News:"
+    getnews hacker-news
+}

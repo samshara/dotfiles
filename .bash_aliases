@@ -11,4 +11,6 @@ alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias mkdir="mkdir -pv"
 alias wget="wget -c"
 alias histg="history | grep"
+alias gitl='git log --graph --oneline --all --decorate --pretty="%C(bold)%ad%C(reset) %C(yellow)%h%C(reset) %an %C(blue)%s" --date=format:"%y/%m/%d"'
+alias magit='emacsclient -n -e "(magit-status)"'
 

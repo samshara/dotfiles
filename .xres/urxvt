@@ -83,5 +83,3 @@ URxvt.keysym.M-s: perl:keyboard-select:search
 
 URxvt.url-launcher: /usr/bin/firefox
 URxvt.matcher.button: 1
-
-

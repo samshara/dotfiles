@@ -3,6 +3,7 @@
 #
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
-export PATH="$PATH:node_modules/.bin"
 # Autostart X at login
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+export PATH="$HOME/.node_modules/bin:$PATH"
+export PATH="/opt/anaconda/bin:$PATH"
