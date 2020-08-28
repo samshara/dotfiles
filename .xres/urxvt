@@ -1,5 +1,3 @@
-#define rai_font     Roboto Mono for Powerline
-#define rai_fontsize 8
 ! Compile xft: Attempt to find a visual with the given bit depth;
 URxvt*depth: 32
 
@@ -14,10 +12,10 @@ URxvt.perl-ext-common: default,keyboard-select,matcher
 
 
 ! Select the fonts to be used. This is a comma separated list of font
-URxvt*font: xft:rai_font:medium:size=rai_fontsize,xft:Noto Emoji
-URxvt*boldFont: xft:rai_font:bold:size=rai_fontsize
-URxvt*italicFont: xft:rai_font:italic:size=rai_fontsize
-URxvt*boldItalicFont: xft:rai_font:bold:italic:size=rai_fontsize
+URxvt*font: xft:Roboto Mono for Powerline:medium:size=8,xft:Noto Sans,xft:Noto Emoji
+URxvt*boldFont: xft:Roboto Mono for Powerline:bold:size=8
+URxvt*italicFont: xft:Roboto Mono for Powerline:italic:size=8
+URxvt*boldItalicFont: xft:Roboto Mono for Powerline:bold:italic:size=8
 
 ! Use the specified colour for bold characters when the text is the default foreground colour
 !URxvt*colorBD:#01a252
@@ -70,7 +68,7 @@ URxvt*cursorBlink: false
 URxvt*cursorUnderline: false
 
 ! Sets the spacing between letters
-URxvt*letterSpace: 1
+URxvt*letterSpace:1 
 
 ! Specifies whether to use native transparency
 URxvt*transparent: false

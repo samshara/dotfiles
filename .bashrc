@@ -222,3 +222,4 @@ startmyday () {
     echo "News from Hacker News:"
     getnews hacker-news
 }
+source /usr/share/nvm/init-nvm.sh
