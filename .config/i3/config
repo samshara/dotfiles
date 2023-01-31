@@ -7,7 +7,6 @@
 #
 
 # i3 config file (v4)
-#
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
@@ -52,7 +51,7 @@ font pango:Roboto Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -197,14 +196,15 @@ mode $launcher {
 #Workspace Assignment
 #assign [class="Firefox"] $workspace2
 assign [class="Emacs"] $workspace3
-assign [class="Google-chrome"] $workspace1 
-assign [class="jetbrains-studio"] $workspace2
+assign [class="Google-chrome"] $workspace1
+assign [class="Nemo"] $workspace2
 assign [class="Code"] $workspace4
 assign [class="Spotify"] $workspace5
+assign [class="qBittorrent"] $workspace9
 # Floating
 for_window [class="Lxappearance"] floating enable
 for_window [class="Gnome-calculator"] floating enable
-for_window [class="^Termite$" instance="scratchpad"] border none;move scratchpad
+for_window [class="^kitty" instance="scratchpad"] border none;move scratchpad
 
 #Set window appearence          border    bg        fg       indicator
 client.focused                   $grey    $grey     $border   $border
@@ -250,7 +250,7 @@ bar {
 				background         $black
 				separator          $grey
 
-#                                                  BORDER       BACKGROUND   TEXT
+#                          BORDER       BACKGROUND   TEXT
 				focused_workspace  $black       $black       $border
 				inactive_workspace $black       $black       $grey
 				active_workspace   $black       $black       $grey
@@ -270,13 +270,14 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightne
 #Wallpaper
 exec --no-startup-id feh --bg-fill /home/dovakiin/Pictures/wallpaper/wallhaven-279963.jpg
 #Redshift
-exec --no-startup-id redshift -l 27.71:85.32 &
+exec --no-startup-id redshift-gtk -l 26.87:87.93 &
 #Startup
 exec --no-startup-id picom -b --config $HOME/.config/picom/picom.conf &
+exec --no-startup-id dbus-launch dunst -config $HOME/.config/dunst/dunstrc &
 #Dual monitor setup for work
 exec --no-startup-id dual_monitor &
 exec --no-startup-id betterlockscreen -w &
 #Screenshots
-bindsym Print exec gnome-screenshot
-bindsym --release Shift+Print exec gnome-screenshot -a
-exec --no-startup-id termite --name scratchpad &
+bindsym Print exec flameshot screen
+bindsym --release Shift+Print exec flameshot gui
+exec --no-startup-id kitty --name scratchpad &

@@ -8,9 +8,9 @@
 
 # Unique Bash version check
 if ((BASH_VERSINFO[0] < 4))
-then 
-    echo "sensible.bash: Looks like you're running an older version of Bash." 
-    echo "sensible.bash: You need at least bash-4.0 or some options will not work correctly." 
+then
+    echo "sensible.bash: Looks like you're running an older version of Bash."
+    echo "sensible.bash: You need at least bash-4.0 or some options will not work correctly."
     echo "sensible.bash: Keep your software up-to-date!"
 fi
 
@@ -186,15 +186,13 @@ function my_prompt
     # Set the PYTHON_VIRTUALENV variable.
     set_virtualenv
 
-    PS1="[${PYTHON_VIRTUALENV}${BMAGENTA}\w ${GREEN}@${UC}\u${DF}]${DF}"
+    PS1="[${PYTHON_VIRTUALENV}${BMAGENTA}\w ${GREEN}@${UC}\u${DF}]${DF} "
 }
 
 # Try to enable the auto-completion (type: "pacman -S bash-completion" to install it).
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
-source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
 export ALTERNATE_EDITOR=""
 
-# added by Anaconda3 4.2.0 installer
 # add ruby gem path
 export EDITOR=emacsclient
 export VISUAL=emacsclient
@@ -205,21 +203,14 @@ export NVM_DIR="/home/dovakiin/.nvm"
 
 # add fzf files for bash integration
 source /usr/share/fzf/completion.bash && source /usr/share/fzf/key-bindings.bash
-
-# get news
-getnews () {
-    curl https://newsapi.org/v2/top-headlines -s -G \
-         -d sources=$1 \
-         -d apiKey=6ba822c1df3f4f799a0164485799de58 \
-        | jq '.articles[] | .title, .url'
-}
-
-# start the day
-startmyday () {
-    echo "Good morning, samshara."
-    echo "The weather right now:"
-    ansiweather -l kathmandu
-    echo "News from Hacker News:"
-    getnews hacker-news
-}
 source /usr/share/nvm/init-nvm.sh
+DOCKER_BUILDKIT=1
+export ANDROID_HOME="$HOME/Android/Sdk"
+source "$HOME/.togglessh.rc"
+export PATH="$PATH:$HOME/.emacs.d/bin"
+
+# pnpm
+export PNPM_HOME="/home/dovakiin/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
+# pnpm end
