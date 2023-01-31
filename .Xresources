@@ -27,7 +27,6 @@
 *color7:  #a89984
 *color15: #ebdbb2
 
-#include </home/dovakiin/.xres/urxvt>
 #include </home/dovakiin/.xres/xft>
 ! ------------------------------------------------------------------------------
 ! ROFI Color theme

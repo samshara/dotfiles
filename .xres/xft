@@ -1,10 +1,10 @@
 ! vi:syntax=xdefaults
 
-Xft.antialias:			true
-Xft.autohint:			false
-Xft.dpi:		        96
-Xft.lcdfilter:                  lcddefault
-Xft.hinting:			true
-Xft.hintstyle:			hintfull
-Xft.rgba:	    		rgb
+Xft.antialias: true
+Xft.autohint:	false
+Xft.dpi: 96
+Xft.lcdfilter: lcddefault
+Xft.hinting: true
+Xft.hintstyle: hintfull
+Xft.rgba: rgb
 Emacs.font: Source Code Pro-9
