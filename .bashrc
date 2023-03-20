@@ -117,80 +117,10 @@ alias dmesg='dmesg --color'
 alias ls='ls --color=auto'
 
 export TERM=xterm-256color
-## Colors?  Used for the prompt.
-#Regular text color
-BLACK='\[\e[0;30m\]'
-#Bold text color
-BBLACK='\[\e[1;30m\]'
-#background color
-BGBLACK='\[\e[40m\]'
-RED='\[\e[0;31m\]'
-BRED='\[\e[1;31m\]'
-BGRED='\[\e[41m\]'
-GREENA='\[\033[01;32m\]'
-GREEN='\[\e[0;32m\]'
-BGREEN='\[\e[1;32m\]'
-BGGREEN='\[\e[1;32m\]'
-YELLOW='\[\e[0;33m\]'
-BYELLOW='\[\e[1;33m\]'
-BGYELLOW='\[\e[1;33m\]'
-BLUE='\[\e[0;34m\]'
-BBLUE='\[\e[1;34m\]'
-BGBLUE='\[\e[1;34m\]'
-MAGENTA='\[\e[0;35m\]'
-BMAGENTA='\[\e[1;35m\]'
-BGMAGENTA='\[\e[1;35m\]'
-CYAN='\[\e[0;36m\]'
-BCYAN='\[\e[1;36m\]'
-BGCYAN='\[\e[1;36m\]'
-WHITE='\[\e[0;37m\]'
-BWHITE='\[\e[1;37m\]'
-BGWHITE='\[\e[1;37m\]'
-COLOR_NONE='\[\e[0m\]'
-
-# Determine active Python virtualenv details.
-function set_virtualenv () {
-    if test -z "$VIRTUAL_ENV" ; then
-        PYTHON_VIRTUALENV=""
-    else
-        PYTHON_VIRTUALENV="${BLUE}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE} "
-    fi
-}
-
-PROMPT_COMMAND=my_prompt
-
-function my_prompt
-{
-    if [ "$?" -eq "0" ]
-    then
-        #smiley
-        SC="${GREEN}"
-    else
-        #frowney
-        SC="${RED}"
-    fi
-    if [ $UID -eq 0 ]
-    then
-        #root user color
-        UC="${RED}"
-    else
-        #normal user color
-        UC="${BGWHITE}"
-    fi
-    #hostname color
-    HC="${GREENA}"
-    #regular color
-    RC="${BWHITE}"
-    #default color
-    DF='\[\e[0m\]'
-    # Set the PYTHON_VIRTUALENV variable.
-    set_virtualenv
-
-    PS1="[${PYTHON_VIRTUALENV}${BMAGENTA}\w ${GREEN}@${UC}\u${DF}]${DF} "
-}
 
 # Try to enable the auto-completion (type: "pacman -S bash-completion" to install it).
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
+
 export ALTERNATE_EDITOR=""
 
 # add ruby gem path
@@ -214,3 +144,7 @@ export PNPM_HOME="/home/dovakiin/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 # pnpm end
+
+# starship prompt
+eval "$(starship init bash)"
+
